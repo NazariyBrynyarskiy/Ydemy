@@ -1,2 +1,2 @@
-# Ydemy
-Java pet-project 4: Spring learning marketplace
+# Java site based on Spring Framework
+This is a site where you can buy courses and publish your own.
