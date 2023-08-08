@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Confirmation</title>
+</head>
+<body>
+
+  <h2>User registered successfully!</h2>
+
+  <ul>
+    <li th:text="'Username:'  + ${userLogin.username}"></li>
+      <li th:text="'Username:'  + ${userLogin.name}"></li>
+      <li th:text="'Username:'  + ${userLogin.surname}"></li>
+      <li th:text="'Username:'  + ${userLogin.email}"></li>
+  </ul>
+
+    <hr>
+
+    <a th:href="@{/auth}">Login with a new account</a>
+
+</body>
+</html>

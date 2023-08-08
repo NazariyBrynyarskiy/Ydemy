@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Login Page</title>
+
+    <style>
+        .loginError i {
+            color: red;
+            font-style: normal;
+        }
+        .logout {
+            color: darkseagreen;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div style="background-color: #b2b2b2; margin-left: 30%; margin-right: 30%; margin-top: 5%">
+        <div>
+            <h3>My Custom Login Page</h3>
+            <form action="#" th:action="@{/authenticateTheUser}" method="post">
+                <p>
+                    User name: <input type="text" name="username">
+                </p>
+
+                <p>
+                    Password: <input type="text" name="password">
+                </p>
+
+                <div class="loginError" th:if="${param.error}">
+                    <i>Invalid Username or Password</i>
+                </div>
+
+                <button type="submit">Login</button>
+
+                <div class="logout" th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+
+            </form>
+        </div>
+        <div>
+            <a th:href="@{/register/showRegistrationForm}" role="button">Register</a>
+        </div>
+    </div>
+</body>
+</html>
