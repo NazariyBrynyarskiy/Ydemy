@@ -1,4 +1,4 @@
-package pet.prjct.ydemy.ydemy.service;
+package pet.prjct.ydemy.ydemy.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +12,7 @@ import pet.prjct.ydemy.ydemy.dao.UserRepository;
 import pet.prjct.ydemy.ydemy.model.UserLogin;
 import pet.prjct.ydemy.ydemy.model.entity.Authority;
 import pet.prjct.ydemy.ydemy.model.entity.User;
+import pet.prjct.ydemy.ydemy.service.UserService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,11 +46,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
     @Override

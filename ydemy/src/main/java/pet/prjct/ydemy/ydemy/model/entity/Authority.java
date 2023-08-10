@@ -13,9 +13,6 @@ public class Authority {
     @Column(name = "authority")
     private String authority;
 
-    @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User user;
 
     public Authority() {
 
@@ -42,20 +39,12 @@ public class Authority {
         this.authority = authority;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public String toString() {
         return "Authority{" +
                 "username='" + username + '\'' +
-                ", authority='" + authority + '\'' +
-                ", user=" + user +
+                ", authority='" + authority +
                 '}';
     }
 }

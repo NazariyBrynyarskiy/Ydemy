@@ -25,7 +25,8 @@ public class User {
     @Column(name = "enabled")
     private int enabled;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private Authority authority;
 
     public User() {
@@ -104,7 +105,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", authority=" + authority +
                 '}';

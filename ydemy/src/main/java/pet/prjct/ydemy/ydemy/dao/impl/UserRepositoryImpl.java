@@ -1,6 +1,8 @@
 package pet.prjct.ydemy.ydemy.dao.impl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,12 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByUsername(String username) {
-        TypedQuery<User> users = entityManager.createQuery(
-                "FROM User WHERE username =: usname", User.class
-        );
-        users.setParameter("usname", username);
+        TypedQuery<User> result = entityManager.createQuery(
+                "FROM User WHERE username =: usname", User.class);
 
-        return users.getSingleResult();
+        result.setParameter("usname", username);
+
+        return result.getSingleResult();
     }
 
     @Override
@@ -51,5 +53,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Transactional
     public void save(User user) {
         entityManager.merge(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 }

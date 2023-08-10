@@ -15,14 +15,4 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/leaders")
-    public String getManagerPage() {
-        return "managers";
-    }
-
-    @GetMapping("/systems")
-    public String getAdminPage() {
-        return "admins";
-    }
-
 }

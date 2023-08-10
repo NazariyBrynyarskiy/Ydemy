@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+  <style>
+    html {
+      background-color: black;
+    }
+    h1 {
+      color: red;
+    }
+    h3 {
+        color: white;
+    }
+    a {
+        color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>ADMIN PAGE</h1>
+
+  <form th:action="@{/systems/update-user-role}" method="POST">
+      <input type="text" name="username" placeholder="Search...">
+
+      <select name="authority" required>
+          <option value="ROLE_USER">USER</option>
+          <option value="ROLE_MANAGER">MANAGER</option>
+      </select>
+      <button type="submit">Submit</button>
+  </form>
+
+  <h3><p th:text="${message}"/></h3>
+
+  <a th:href="@{/}">Index page</a>
+  <br>
+  <a th:href="@{/leaders/}">Manager page</a>
+
+</body>
+</html>

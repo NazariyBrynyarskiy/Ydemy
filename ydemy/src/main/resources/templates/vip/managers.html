@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager page</title>
+</head>
+<body>
+  <h1>Manager page</h1>
+  <h3><a th:href="@{/leaders/all}">List of all users</a></h3>
+  <form th:action="@{/leaders/search}" method="GET">
+      <input type="text" name="query" placeholder="Search...">
+      <button type="submit">Search</button>
+  </form>
+
+  <h3><p th:text="${user}"></p></h3>
+
+  <a th:href="@{/}">Index page</a>
+</body>
+</html>
