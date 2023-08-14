@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
+    public String getHomePage() {
+        return "index";
+    }
+
+    @GetMapping("/settings")
     public String getIndexPage(Model model) {
         model.addAttribute("helloSpring", "Hello Spring!");
 
-        return "index";
+        return "settings";
     }
 
 }

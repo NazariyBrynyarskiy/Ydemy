@@ -1,19 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Manager page</title>
+    <title>Manager</title>
+    <link rel="stylesheet" href="/main.css">
 </head>
+
 <body>
-  <h1>Manager page</h1>
-  <h3><a th:href="@{/leaders/all}">List of all users</a></h3>
-  <form th:action="@{/leaders/search}" method="GET">
-      <input type="text" name="query" placeholder="Search...">
-      <button type="submit">Search</button>
-  </form>
 
-  <h3><p th:text="${user}"></p></h3>
+<div class="container">
+    <header>
+        <div class="home-link">
+            <h3><a th:href="@{/}">Ydemy</a></h3>
+        </div>
+        <div class="other-links">
+            <h3><a href="#">Teach</a></h3>
+            <h3><a href="#">My courses</a></h3>
+            <h3><a th:href="@{/settings}">Settings</a></h3>
+            <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
+                <h3><a th:href="@{/leaders/}" style="color: blue">Managers page</a></h3>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')">
+                <h3><a th:href="@{/systems/}" style="color: red">ADMIN</a></h3>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <main>
+        <div class="main">
+            <h2>Manager page</h2>
+            <h3><a th:href="@{/leaders/all}">List of all users</a></h3>
+            <form th:action="@{/leaders/search}" method="GET">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
 
-  <a th:href="@{/}">Index page</a>
+            <h3><p th:text="${user}"></p></h3>
+        </div>
+    </main>
+    <footer>
+        <h3>Pet project 4</h3>
+    </footer>
+</div>
+
 </body>
 </html>

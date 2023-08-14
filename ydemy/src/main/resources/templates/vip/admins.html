@@ -1,41 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>ADMIN</title>
-  <style>
-    html {
-      background-color: black;
-    }
-    h1 {
-      color: red;
-    }
-    h3 {
-        color: white;
-    }
-    a {
-        color: white;
-    }
-  </style>
+    <link rel="stylesheet" href="/main.css">
 </head>
+
 <body>
-  <h1>ADMIN PAGE</h1>
 
-  <form th:action="@{/systems/update-user-role}" method="POST">
-      <input type="text" name="username" placeholder="Search...">
+<div class="container">
+    <header>
+        <div class="home-link">
+            <h3><a th:href="@{/}">Ydemy</a></h3>
+        </div>
+        <div class="other-links">
+            <h3><a href="#">Teach</a></h3>
+            <h3><a href="#">My courses</a></h3>
+            <h3><a th:href="@{/settings}">Settings</a></h3>
+            <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
+                <h3><a th:href="@{/leaders/}" style="color: blue">Managers page</a></h3>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')">
+                <h3><a th:href="@{/systems/}" style="color: red">ADMIN</a></h3>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <main>
+        <div class="main">
+            <h1>ADMIN PAGE</h1>
 
-      <select name="authority" required>
-          <option value="ROLE_USER">USER</option>
-          <option value="ROLE_MANAGER">MANAGER</option>
-      </select>
-      <button type="submit">Submit</button>
-  </form>
+            <h2>Change user's role</h2>
+            <form th:action="@{/systems/update-user-role}" method="POST">
+                <input type="text" name="username" placeholder="Search...">
 
-  <h3><p th:text="${message}"/></h3>
+                <select name="authority" required>
+                    <option value="ROLE_USER">USER</option>
+                    <option value="ROLE_MANAGER">MANAGER</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
 
-  <a th:href="@{/}">Index page</a>
-  <br>
-  <a th:href="@{/leaders/}">Manager page</a>
+            <h3><p th:text="${message}"/></h3>
+        </div>
+    </main>
+    <footer>
+        <h3>Pet project 4</h3>
+    </footer>
+</div>
 
 </body>
 </html>

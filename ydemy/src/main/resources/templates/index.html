@@ -1,29 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Index page</title>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="/main.css">
 </head>
-<body>
-    <h1><p th:text="${helloSpring}"/></h1>
-    <hr>
-    <p>
-        <h3>User: <span sec:authentication="principal.username" /></h3>
-        <h3>Role(s): <span sec:authentication="principal.authorities" /></h3>
-    </p>
-    <hr>
-    <p>
-        <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
-            <a th:href="@{/leaders/}">Managers page</a>
-        </div>
-        <div sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/systems/}">ADMIN</a>
-        </div>
-    </p>
 
-    <form action="#" th:action="@{/logout}" method="post" >
-        <input type="submit" value="Logout"/>
-    </form>
+<body>
+
+<div class="container">
+  <header>
+    <div class="home-link">
+      <h3><a th:href="@{/}">Ydemy</a></h3>
+    </div>
+    <div class="other-links">
+      <h3><a href="#">Teach</a></h3>
+      <h3><a href="#">My courses</a></h3>
+      <h3><a th:href="@{/settings}">Settings</a></h3>
+      <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
+        <h3><a th:href="@{/leaders/}" style="color: blue">Managers page</a></h3>
+      </div>
+      <div sec:authorize="hasRole('ADMIN')">
+        <h3><a th:href="@{/systems/}" style="color: red">ADMIN</a></h3>
+      </div>
+    </div>
+  </header>
+  <hr>
+  <main>
+    <div class="main">
+      <h2>Search for a course</h2>
+      <form style="display: flex; align-items: center;">
+        <input type="text" name="query" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <h3>Pet project 4</h3>
+  </footer>
+</div>
+
 </body>
 </html>
