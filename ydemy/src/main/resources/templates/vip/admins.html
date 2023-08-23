@@ -14,7 +14,7 @@
             <h3><a th:href="@{/}">Ydemy</a></h3>
         </div>
         <div class="other-links">
-            <h3><a href="#">Teach</a></h3>
+            <h3><a th:href="@{/teach}">Teach</a></h3>
             <h3><a href="#">My courses</a></h3>
             <h3><a th:href="@{/settings}">Settings</a></h3>
             <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">

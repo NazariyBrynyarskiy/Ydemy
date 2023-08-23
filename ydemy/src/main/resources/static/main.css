@@ -81,11 +81,11 @@ footer h3 {
     padding-top: 3%;
 }
 
-form {
-    display: flex;
-    width: 100%;
+/*form {*/
+/*    display: flex;*/
+/*    width: 100%;*/
 
-}
+/*}*/
 
 input[type="text"] {
     border-radius: 20px;

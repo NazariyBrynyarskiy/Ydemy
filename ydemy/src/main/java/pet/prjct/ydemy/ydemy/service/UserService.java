@@ -13,4 +13,7 @@ public interface UserService extends UserDetailsService {
 
     boolean containsUserByUsername(String username);
 
+    boolean containsUserByEmail(String email);
+
+
 }

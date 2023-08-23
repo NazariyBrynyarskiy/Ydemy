@@ -50,6 +50,21 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public boolean containsUserByEmail(String email) {
+        TypedQuery<User> users = entityManager.createQuery(
+                "FROM User WHERE email = :email", User.class
+        );
+        users.setParameter("email", email);
+
+        for (User user : users.getResultList()) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     @Transactional
     public void save(User user) {
         entityManager.merge(user);

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pet.prjct.ydemy.ydemy.dao.RoleRepository;
 import pet.prjct.ydemy.ydemy.dao.UserRepository;
 import pet.prjct.ydemy.ydemy.model.UserLogin;
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void save(UserLogin userLogin) {
         User user = new User();
         Authority authority = new Authority();
@@ -85,7 +87,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.containsUserByUsername(username);
     }
 
-//    @Deprecated
+    @Override
+    public boolean containsUserByEmail(String email) {
+        return userRepository.containsUserByEmail(email);
+    }
+
+    //    @Deprecated
 //    public static void sav(UserLogin userLogin, BCryptPasswordEncoder passwordEncoder) {
 //        User user = new User();
 //        Authority authority = new Authority();
