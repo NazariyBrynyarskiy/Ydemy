@@ -7,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pet.prjct.ydemy.ydemy.model.CourseCreation;
+import pet.prjct.ydemy.ydemy.model.entity.Course;
 import pet.prjct.ydemy.ydemy.service.CourseService;
 
 @Controller
@@ -53,5 +51,29 @@ public class TeachController {
         theModel.addAttribute("message",
                 "You already own the course with the title '" + courseCreation.getTitle() + "'.");
         return "teach-page";
+    }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") long id,
+                               Model theModel) {
+        Course course = courseService.findById(id);
+        theModel.addAttribute("course", course);
+
+        return "update-course-page";
+    }
+
+    @PostMapping("/update-course")
+    public String updateCourse(@Valid @ModelAttribute("course") Course course,
+                               BindingResult bindingResult,
+                               Model theModel) {
+        if (bindingResult.hasErrors()) {
+            theModel.addAttribute("message", "Some errors");
+
+            return "update-course-page";
+        }
+
+        courseService.update(course);
+
+        return "redirect:/teach";
     }
 }

@@ -87,4 +87,32 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         return query.getResultList();
     }
+
+    @Override
+    public boolean update(long id, String title, int price, String description) {
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE courses SET title=?, price=?, description=? WHERE id=?")) {
+
+            preparedStatement.setString(1, title);
+            preparedStatement.setInt(2, price);
+            preparedStatement.setString(3, description);
+            preparedStatement.setLong(4, id);
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while saving course. ", e);
+        }
+    }
+
+    @Override
+    public List<Course> findAllByTitle(String title) {
+        TypedQuery<Course> query = entityManager.createQuery(
+                "FROM Course WHERE title = :title", Course.class);
+        query.setParameter("title", title);
+
+        return query.getResultList();
+    }
 }

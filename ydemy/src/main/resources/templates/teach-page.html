@@ -61,7 +61,7 @@
             <br>
 
             <div class="descriptionClass">
-                <textarea type="text" th:field="*{description}" placeholder="Description (*)"></textarea>
+                <textarea type="text" th:field="*{description}" placeholder="Description"></textarea>
             </div>
 
             <div class="createButton">
@@ -87,18 +87,14 @@
                 <td class="description-cell" th:text="${course.price}"></td>
                 <td class="description-cell" th:text="${course.description}"></td>
                 <td>
-                    <a style="color: aqua" href="#">UPDATE</a>
-                    <a style="color: red" href="#">DELETE</a>
-                </td>
-                <!--                <td>-->
-<!--                    <a style="color: aqua" th:href="@{/update(username=${employee.username})}">-->
-<!--                        Update-->
-<!--                    </a>-->
+                    <a style="color: aqua" th:href="@{/teach/update(id=${course.id})}">
+                        Update
+                    </a>
 <!--                    <a style="color: red" th:href="@{/delete(username=${employee.username})}"-->
 <!--                       onclick="if (!confirm('Are you sure you want to delete?')) return false">-->
 <!--                        Delete-->
 <!--                    </a>-->
-<!--                </td>-->
+                </td>
             </tr>
             </tbody>
         </table>

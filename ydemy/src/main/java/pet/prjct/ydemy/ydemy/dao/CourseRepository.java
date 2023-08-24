@@ -14,4 +14,9 @@ public interface CourseRepository {
     boolean courseExisting(String title, String username);
 
     List<Course> findAllByUsername(String username);
+
+    boolean update(long id, String title, int price, String description);
+
+    List<Course> findAllByTitle(String title);
+
 }

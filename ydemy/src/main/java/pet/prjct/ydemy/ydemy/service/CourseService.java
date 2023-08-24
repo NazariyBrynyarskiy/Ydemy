@@ -10,4 +10,10 @@ public interface CourseService {
     boolean save(CourseCreation courseCreation);
 
     List<Course> findAllByCookieUsername();
+
+    Course findById(long id);
+
+    boolean update(Course course);
+
+    List<Course> findAllByTitle(String title);
 }
