@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pet.prjct.ydemy.ydemy.dao.cookie.Cookie;
 import pet.prjct.ydemy.ydemy.model.CourseCreation;
 import pet.prjct.ydemy.ydemy.service.CourseService;
 
@@ -47,12 +46,12 @@ public class TeachController {
 
         boolean courseAdding = courseService.save(courseCreation);
 
+        if (courseAdding) {
+            return "redirect:/teach";
+        }
+
         theModel.addAttribute("message",
-                (courseAdding) ? "Course was added." :
-                        "You already own the course with the title '" + courseCreation.getTitle() + "'.");
-
-        theModel.addAttribute("courseCreation", new CourseCreation());
-
+                "You already own the course with the title '" + courseCreation.getTitle() + "'.");
         return "teach-page";
     }
 }

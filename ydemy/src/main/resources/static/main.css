@@ -56,7 +56,7 @@ main {
     margin-left: auto;
     margin-right: auto;
 
-    height: 700px;
+    min-height: 700px;
     color: white;
     text-align: center;
 
@@ -86,11 +86,31 @@ footer h3 {
 /*    width: 100%;*/
 
 /*}*/
-
 input[type="text"] {
     border-radius: 20px;
     padding: 10px;
     flex: 1;
+}
+
+.priceClass input[type="text"] {
+    border-radius: 20px;
+    padding: 10px;
+    flex: 1;
+}
+
+.titleClass input[type="text"] {
+    border-radius: 20px;
+    padding: 10px;
+    flex: 1;
+}
+
+.descriptionClass textarea[type="text"] {
+    padding: 20px;
+    border-radius: 20px;
+    width: 45%;
+    height: 300px;
+    font-size: 16px;
+    resize: none;
 }
 
 button[type="submit"] {
@@ -103,6 +123,32 @@ button[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+.createButton button[type="submit"] {
+    padding: 20px;
+}
+
 button[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed; /* Рівномірний розподіл ширини колонок */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word; /* Перенесення тексту в колонках */
+}
+
+.description-cell {
+    white-space: pre-line;
+    overflow: visible;
+    text-overflow: clip;
+    word-wrap: break-word; /* Перенесення тексту в описі */
 }

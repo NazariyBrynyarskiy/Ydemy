@@ -5,6 +5,10 @@
     <title>Teach</title>
     <link rel="stylesheet" href="/main.css">
 
+    <style>
+
+    </style>
+
 </head>
 <body>
 <header>
@@ -33,7 +37,7 @@
               th:object="${courseCreation}"
               method="post">
 
-            <div>
+            <div class="titleClass">
                 <input type="text" th:field="*{title}" placeholder="Title (*)"/>
             </div>
             <div th:if="${#fields.hasErrors('price')}">
@@ -42,8 +46,11 @@
                 </ul>
             </div>
 
-            <div>
-                <input type="text" th:field="*{price}" placeholder="Price (*)"/>
+            <br>
+
+            Price($)
+            <div class="priceClass">
+                <input type="text" th:field="*{price}" placeholder="Price (*)" />
             </div>
             <div th:if="${#fields.hasErrors('price')}">
                 <ul>
@@ -51,15 +58,50 @@
                 </ul>
             </div>
 
-            <div>
-                <input type="text" th:field="*{description}" placeholder="Description (*)"/>
+            <br>
+
+            <div class="descriptionClass">
+                <textarea type="text" th:field="*{description}" placeholder="Description (*)"></textarea>
             </div>
 
-            <div>
+            <div class="createButton">
                 <button type="submit">Create</button>
             </div>
         </form>
 
+        <br><br>
+
+        <h1>My courses</h1>
+        <table>
+            <thead>
+            <tr>
+                <th><h2>Title</h2></th>
+                <th><h2>Price</h2></th>
+                <th><h2>Description</h2></th>
+                <th><h2>Action</h2></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td class="description-cell" th:text="${course.title}"></td>
+                <td class="description-cell" th:text="${course.price}"></td>
+                <td class="description-cell" th:text="${course.description}"></td>
+                <td>
+                    <a style="color: aqua" href="#">UPDATE</a>
+                    <a style="color: red" href="#">DELETE</a>
+                </td>
+                <!--                <td>-->
+<!--                    <a style="color: aqua" th:href="@{/update(username=${employee.username})}">-->
+<!--                        Update-->
+<!--                    </a>-->
+<!--                    <a style="color: red" th:href="@{/delete(username=${employee.username})}"-->
+<!--                       onclick="if (!confirm('Are you sure you want to delete?')) return false">-->
+<!--                        Delete-->
+<!--                    </a>-->
+<!--                </td>-->
+            </tr>
+            </tbody>
+        </table>
     </main>
     <footer>
         <h3>Pet project 4</h3>

@@ -2,8 +2,8 @@ package pet.prjct.ydemy.ydemy.dao.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import pet.prjct.ydemy.ydemy.dao.CourseRepository;
 import pet.prjct.ydemy.ydemy.dao.UserRepository;
@@ -15,12 +15,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CourseRepositoryImpl implements CourseRepository {
 
     private EntityManager entityManager;
     private UserRepository userRepository;
+
+    @Value("${spring.datasource.url}")
+    private String jdbcUrl;
+
+    @Value("${spring.datasource.username}")
+    private String dbUser;
+
+    @Value("${spring.datasource.password}")
+    private String dbPassword;
+
 
     @Autowired
     public CourseRepositoryImpl(EntityManager entityManager,
@@ -37,9 +50,6 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     @Override
     public void save(int price, String username, String title, String description) {
-        String jdbcUrl = "jdbc:mysql://localhost:3306/Ydemy";
-        String dbUser = "springstudent";
-        String dbPassword = "springstudent";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -53,7 +63,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error while saving course", e);
+            throw new RuntimeException("Error while saving course. ", e);
         }
     }
 
@@ -66,5 +76,15 @@ public class CourseRepositoryImpl implements CourseRepository {
         query.setParameter("username", username);
 
         return !query.getResultList().isEmpty();
+    }
+
+    @Override
+    public List<Course> findAllByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        TypedQuery<Course> query = entityManager.createQuery(
+                "FROM Course WHERE user.username = :username", Course.class);
+        query.setParameter("username", username);
+
+        return query.getResultList();
     }
 }

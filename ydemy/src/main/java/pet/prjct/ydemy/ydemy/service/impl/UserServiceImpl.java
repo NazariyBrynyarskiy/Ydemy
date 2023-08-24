@@ -15,7 +15,6 @@ import pet.prjct.ydemy.ydemy.model.entity.Authority;
 import pet.prjct.ydemy.ydemy.model.entity.User;
 import pet.prjct.ydemy.ydemy.service.UserService;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +25,6 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
-
-
-//    public static void main(String[] args) {
-//        UserLogin userLogin = new UserLogin(
-//                "usersam",
-//                "Sam",
-//                "Bam",
-//                "bam@gmail.com",
-//                "sam123"
-//        );
-//        sav(userLogin, new BCryptPasswordEncoder());
-//
-//    }
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
@@ -92,47 +78,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.containsUserByEmail(email);
     }
 
-    //    @Deprecated
-//    public static void sav(UserLogin userLogin, BCryptPasswordEncoder passwordEncoder) {
-//        User user = new User();
-//        Authority authority = new Authority();
-//
-//        user.setUsername(userLogin.getUsername());
-//        user.setName(userLogin.getName());
-//        user.setSurname(userLogin.getSurname());
-//        user.setEmail(userLogin.getEmail());
-//        user.setPassword("{bcrypt}" + passwordEncoder.encode(userLogin.getPassword()));
-//        user.setEnabled(1);
-//
-//        authority.setUsername(user.getUsername());
-//        authority.setAuthority("ROLE_USER");
-//
-//        try(Connection connection = DriverManager.getConnection(
-//                "jdbc:mysql://localhost:3306/Ydemy", "springstudent", "springstudent")) {
-//            System.out.println("UserLogin" + userLogin);
-//            System.out.println("User" + user);
-//            System.out.println("Authority" + authority);
-//            try(PreparedStatement statement = connection.prepareStatement(
-//                    "INSERT INTO `users` VALUES(?, ?, ?, ?, ?, ?)")) {
-//                statement.setString(1, user.getUsername());
-//                statement.setString(2, user.getName());
-//                statement.setString(3, user.getSurname());
-//                statement.setString(4, user.getEmail());
-//                statement.setString(5, user.getPassword());
-//                statement.setInt(6, user.getEnabled());
-//
-//                statement.execute();
-//            }
-//            try(PreparedStatement statement = connection.prepareStatement(
-//                    "INSERT INTO `authorities` VALUES(?, ?)")) {
-//                statement.setString(1, authority.getUsername());
-//                statement.setString(2, authority.getAuthority());
-//
-//                statement.execute();
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
 }

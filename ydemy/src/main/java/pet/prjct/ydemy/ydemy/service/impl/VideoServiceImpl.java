@@ -1,6 +1,5 @@
 package pet.prjct.ydemy.ydemy.service.impl;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import pet.prjct.ydemy.ydemy.service.VideoService;
 

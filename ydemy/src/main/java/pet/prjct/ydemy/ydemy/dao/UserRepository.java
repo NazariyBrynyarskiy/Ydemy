@@ -1,8 +1,6 @@
 package pet.prjct.ydemy.ydemy.dao;
 
-import jakarta.persistence.Query;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+
 import pet.prjct.ydemy.ydemy.model.entity.User;
 
 import java.util.List;

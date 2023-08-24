@@ -1,8 +1,6 @@
 package pet.prjct.ydemy.ydemy.dao.impl;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import pet.prjct.ydemy.ydemy.dao.UserRepository;
 import pet.prjct.ydemy.ydemy.model.entity.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

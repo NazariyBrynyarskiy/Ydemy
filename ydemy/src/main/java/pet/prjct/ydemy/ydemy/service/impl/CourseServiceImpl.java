@@ -4,25 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pet.prjct.ydemy.ydemy.dao.CourseRepository;
-import pet.prjct.ydemy.ydemy.dao.UserRepository;
 import pet.prjct.ydemy.ydemy.dao.cookie.Cookie;
 import pet.prjct.ydemy.ydemy.model.CourseCreation;
+import pet.prjct.ydemy.ydemy.model.entity.Course;
 import pet.prjct.ydemy.ydemy.service.CourseService;
+
+import java.util.List;
 
 
 @Service
 public class CourseServiceImpl implements CourseService {
 
     private CourseRepository courseRepository;
-    private UserRepository userRepository;
     private Cookie cookie;
 
     @Autowired
     public CourseServiceImpl(CourseRepository courseRepository,
-                             UserRepository userRepository,
                              Cookie cookie) {
         this.courseRepository = courseRepository;
-        this.userRepository = userRepository;
         this.cookie = cookie;
     }
 
@@ -45,4 +44,10 @@ public class CourseServiceImpl implements CourseService {
         return false;
     }
 
+    @Override
+    public List<Course> findAllByCookieUsername() {
+        String cookieUsername = cookie.getCurrentUsername();
+
+        return courseRepository.findAllByUsername(cookieUsername);
+    }
 }
