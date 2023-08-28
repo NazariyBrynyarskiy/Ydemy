@@ -1,4 +1,4 @@
-package pet.prjct.ydemy.ydemy.dao;
+package pet.prjct.ydemy.ydemy.dao.jparepo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

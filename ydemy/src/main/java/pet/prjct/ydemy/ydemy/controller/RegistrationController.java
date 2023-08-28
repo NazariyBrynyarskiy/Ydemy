@@ -12,7 +12,6 @@ import pet.prjct.ydemy.ydemy.model.UserLogin;
 import pet.prjct.ydemy.ydemy.service.UserService;
 
 
-
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
@@ -49,17 +48,17 @@ public class RegistrationController {
             return REGISTRATION_FORM;
         }
 
-        if (userService.containsUserByUsername(userLogin.getUsername())) {
+        if (userService.existsByUsername(userLogin.getUsername())) {
             theModel.addAttribute("registrationError",
                     "Username already exists");
-            if (userService.containsUserByEmail(userLogin.getEmail())) {
+            if (userService.existsByEmail(userLogin.getEmail())) {
                 theModel.addAttribute("registrationError",
                         "Username and email already exists.");
             }
             return REGISTRATION_FORM;
         }
 
-        if (userService.containsUserByEmail(userLogin.getEmail())) {
+        if (userService.existsByEmail(userLogin.getEmail())) {
             theModel.addAttribute("registrationError",
                     "Email already exists.");
             return REGISTRATION_FORM;

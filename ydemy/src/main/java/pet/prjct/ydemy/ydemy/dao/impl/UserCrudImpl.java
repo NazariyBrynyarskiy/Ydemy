@@ -5,33 +5,34 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pet.prjct.ydemy.ydemy.dao.UserRepository;
+import pet.prjct.ydemy.ydemy.dao.Crud;
+import pet.prjct.ydemy.ydemy.model.entity.Course;
 import pet.prjct.ydemy.ydemy.model.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class UserCrudImpl implements Crud<User, String> {
 
     private EntityManager entityManager;
 
     @Autowired
-    public UserRepositoryImpl(EntityManager manager) {
+    public UserCrudImpl(EntityManager manager) {
         entityManager = manager;
     }
 
+
     @Override
-    public User findByUsername(String username) {
-        TypedQuery<User> result = entityManager.createQuery(
-                "FROM User WHERE username =: usname", User.class);
+    @Transactional
+    public boolean save(User user) {
+        entityManager.merge(user);
 
-        result.setParameter("usname", username);
-
-        return result.getSingleResult();
+        return true;
     }
 
     @Override
-    public boolean containsUserByUsername(String username) {
+    public boolean existsById(String username) {
         TypedQuery<User> users = entityManager.createQuery(
                 "FROM User WHERE username =: usname", User.class
         );
@@ -47,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean containsUserByEmail(String email) {
+    public boolean existsByParameter(String email) {
         TypedQuery<User> users = entityManager.createQuery(
                 "FROM User WHERE email = :email", User.class
         );
@@ -62,9 +63,32 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    @Transactional
-    public void save(User user) {
-        entityManager.merge(user);
+    public boolean update(User entity) {
+        return false;
+    }
+
+    @Override
+    public List<User> findAllById(String username) {
+        TypedQuery<User> query = entityManager.createQuery(
+                "FROM User WHERE username = :username", User.class);
+        query.setParameter("username", username);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<User> findAllByParameter(String s) {
+        return null;
+    }
+
+    @Override
+    public Optional<User> findById(String username) {
+        TypedQuery<User> result = entityManager.createQuery(
+                "FROM User WHERE username =: usname", User.class);
+
+        result.setParameter("usname", username);
+
+        return Optional.ofNullable(result.getSingleResult());
     }
 
     @Override

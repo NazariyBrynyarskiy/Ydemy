@@ -33,7 +33,7 @@ public class MainController {
     @GetMapping("/teach")
     public String teachPage(Model theModel) {
         theModel.addAttribute("courseCreation", new CourseCreation());
-        theModel.addAttribute("courses", courseService.findAllByCookieUsername());
+        theModel.addAttribute("courses", courseService.findAllById());
 
         return "teach-page";
     }
