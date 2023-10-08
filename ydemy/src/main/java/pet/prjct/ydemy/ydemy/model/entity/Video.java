@@ -22,17 +22,21 @@ public class Video {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "videoPath")
+    @Column(name = "video_path")
     private String videoPath;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JoinColumn(name = "course_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Course course;
 
-    public Video(int views, String title, String videoPath) {
+    @Column(name = "course_id")
+    private long courseId;
+
+    public Video(int views, String title, String videoPath, long courseId) {
         this.views = views;
         this.title = title;
         this.videoPath = videoPath;
+        this.courseId = courseId;
     }
 
     @Override

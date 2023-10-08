@@ -57,7 +57,7 @@ public class CourseCrudImpl implements Crud<Course, String> {
             return true;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error while saving course. ", e);
+            throw new RuntimeException("Error while saving a course. ", e);
         }
     }
 
@@ -73,8 +73,12 @@ public class CourseCrudImpl implements Crud<Course, String> {
     @Override
     public List<Course> findAllByParameter(String title) {
         TypedQuery<Course> query = entityManager.createQuery(
-                "FROM Course WHERE title = :title", Course.class);
-        query.setParameter("title", title);
+                "SELECT c FROM Course c WHERE " +
+                        "(c.title LIKE :titleOne) OR (c.title LIKE :titleTwo) OR (c.title = :titleThree)",
+                Course.class);
+        query.setParameter("titleOne", title + " %");
+        query.setParameter("titleTwo", "% " + title);
+        query.setParameter("titleThree", title);
 
         return query.getResultList();
     }
@@ -89,6 +93,7 @@ public class CourseCrudImpl implements Crud<Course, String> {
     }
 
     @Override
+    // TODO: Implement this method in the future
     public boolean existsById(String s) {
         return false;
     }

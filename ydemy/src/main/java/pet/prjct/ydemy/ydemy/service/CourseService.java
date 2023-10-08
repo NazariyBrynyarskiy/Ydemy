@@ -9,9 +9,10 @@ import pet.prjct.ydemy.ydemy.dao.cookie.Cookie;
 import pet.prjct.ydemy.ydemy.model.CourseCreation;
 import pet.prjct.ydemy.ydemy.model.entity.Course;
 import pet.prjct.ydemy.ydemy.model.entity.User;
+import pet.prjct.ydemy.ydemy.service.search.CourseSearch;
+import pet.prjct.ydemy.ydemy.service.search.CourseSearchImpl;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -58,7 +59,7 @@ public class CourseService {
         return false;
     }
 
-    public List<Course> findAllById() {
+    public List<Course> findAll() {
         String cookieUsername = cookie.getCurrentUsername();
 
         return courseCrudImpl.findAllById(cookieUsername);
@@ -72,13 +73,32 @@ public class CourseService {
 
     @Transactional
     public boolean update(Course course) {
-
         courseCrudImpl.update(course);
 
         return true;
     }
 
+    @Transactional
+    public boolean delete(Course course) {
+        courseJpaRepository.delete(course);
+
+        return true;
+    }
+
+    public long count() {
+        return courseJpaRepository.count();
+    }
+
     public List<Course> findAllByParameter(String title) {
-        return courseCrudImpl.findAllById(title);
+        Set<Course> courses = new HashSet<>();
+
+        CourseSearch courseSearch = new CourseSearchImpl();
+        List<String> keywords = new ArrayList<>(courseSearch.searchCourseByKeywords(title));
+
+        for (String keyword : keywords) {
+            courses.addAll(courseCrudImpl.findAllByParameter(keyword));
+        }
+
+        return new ArrayList<>(courses);
     }
 }

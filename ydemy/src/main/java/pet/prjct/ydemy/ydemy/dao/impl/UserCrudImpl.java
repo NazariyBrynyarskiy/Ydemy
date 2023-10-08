@@ -63,6 +63,7 @@ public class UserCrudImpl implements Crud<User, String> {
     }
 
     @Override
+    // TODO: Implement this method in future
     public boolean update(User entity) {
         return false;
     }
@@ -77,6 +78,7 @@ public class UserCrudImpl implements Crud<User, String> {
     }
 
     @Override
+    // TODO: Implement this method in  future
     public List<User> findAllByParameter(String s) {
         return null;
     }

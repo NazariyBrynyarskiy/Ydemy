@@ -49,7 +49,13 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<Comment> comments;
 
-    public Course(int price, int studentAmount, int lectures, int totalHours, float rating, String title, String description) {
+    public Course(int price,
+                  int studentAmount,
+                  int lectures,
+                  int totalHours,
+                  float rating,
+                  String title,
+                  String description) {
         this.price = price;
         this.studentAmount = studentAmount;
         this.lectures = lectures;

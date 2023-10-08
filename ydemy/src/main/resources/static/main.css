@@ -2,6 +2,7 @@ html {
     background-attachment: fixed;
     background-size: cover;
 }
+
 header {
     display: flex;
     justify-content:space-between;
@@ -60,6 +61,11 @@ main {
     color: white;
     text-align: center;
 
+}
+
+.course {
+    min-height: 700px;
+    text-align: center;
 }
 
 .main {

@@ -20,7 +20,7 @@ public class LeaderRestController {
         this.leaderService = leaderService;
     }
 
-    @GetMapping(path="/all")
+    @GetMapping("/all")
     public @ResponseBody Iterable<User> getAllCommand() {
         return leaderService.findAllUsers();
     }

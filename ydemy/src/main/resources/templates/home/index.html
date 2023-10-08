@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <header>
+    <link rel="stylesheet" href="header-style.css" />
+
+    <div class="home-link">
+      <h3><a th:href="@{/}">Ydemy</a></h3>
+    </div>
+    <div class="other-links">
+      <h3><a th:href="@{/teach}">Teach</a></h3>
+      <h3><a href="#">My courses</a></h3>
+      <h3><a th:href="@{/settings}">Settings</a></h3>
+      <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
+        <h3><a th:href="@{/leaders/}" style="color: blue">Managers page</a></h3>
+      </div>
+      <div sec:authorize="hasRole('ADMIN')">
+        <h3><a th:href="@{/systems/}" style="color: red">ADMIN</a></h3>
+      </div>
+    </div>
+  </header>
+  <hr>
+
+  <main>
+
+    <div class="main">
+
+      <h2>Search for a course</h2>
+      <form th:action="@{/find}" method="GET">
+        <input type="text" name="title" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+
+      <table th:if="${areCoursesPresent}">
+        <thead>
+        <tr>
+          <th><h2>Title</h2></th>
+          <th><h2>Rating</h2></th>
+          <th><h2>Price</h2></th>
+          <th><h2>Author</h2></th>
+        </tr>
+        </thead>
+        <th:block th:each="course : ${findCourses}">
+          <tr>
+            <td th:text="${course.title}"></td>
+            <td th:text="${course.rating}"></td>
+            <td th:text="${course.price} + '$'"></td>
+            <td th:text="${course.user.getUsername()}"></td>
+            <td>
+              <a style="color: aqua" th:href="@{/course(courseId=${course.id})}">
+                Open
+              </a>
+            </td>
+          </tr>
+        </th:block>
+      </table>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <h3>Pet project 4</h3>
+  </footer>
+
+</div>
+
+</body>
+</html>

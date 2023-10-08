@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import pet.prjct.ydemy.ydemy.dao.Crud;
 import pet.prjct.ydemy.ydemy.model.entity.Course;
-import pet.prjct.ydemy.ydemy.model.entity.User;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
